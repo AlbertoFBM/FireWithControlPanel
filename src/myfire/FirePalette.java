@@ -53,7 +53,7 @@ public class FirePalette {
             return 0;
         }
         }catch(NullPointerException e){
-            System.out.println("e");
+            e.getMessage();
         }
         return 0;
     }

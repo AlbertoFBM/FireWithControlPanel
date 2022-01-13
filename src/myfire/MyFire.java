@@ -2,7 +2,11 @@ package myfire;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -10,30 +14,37 @@ import javax.swing.JPanel;
  *
  * @author Alberto
  */
-public class MyFire extends JFrame {
+public class MyFire extends JFrame{
 
-    public final Viewer v = new Viewer();
+    public  final Viewer v = new Viewer();
     public final ControlPanel cp = new ControlPanel();
+
 
     public MyFire() {
 
         initComponents();
-        initViewer();
         initControlPanel();
+        initViewer();
     }
 
-    public static void main(String[] args) {
-
-        new MyFire().setVisible(true);
-    }
 
     private void initComponents() {
-
-        this.setBounds(0, 0, 1400, 900);
+        
+        this.setLayout(new BorderLayout());
+        this.setSize(1500, 900);
         this.setResizable(true);
         this.setTitle("MY FIRE");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
+        
+        
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+
+        Dimension tamanoPantalla = miPantalla.getScreenSize();
+
+        int anchoPantalla = tamanoPantalla.width;
+        int altoPantalla = tamanoPantalla.height;
+        
+        this.setLocation(anchoPantalla / 10, altoPantalla / 10);
         
     }
 
@@ -45,8 +56,14 @@ public class MyFire extends JFrame {
     }
     
     private void initControlPanel(){
-        
+//        cp.setMaximumSize(new Dimension(600,200));
+//        cp.setMinimumSize(new Dimension(600,200));
         add(cp, BorderLayout.WEST);
        
+    }
+    
+    public static void main(String[] args) {
+
+        new MyFire().setVisible(true);
     }
 }

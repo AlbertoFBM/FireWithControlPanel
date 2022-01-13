@@ -19,6 +19,16 @@ public class Viewer extends Canvas implements Runnable {
     private Fire foc = new Fire(388, 388, 2);
     private Thread tFire = new Thread(foc);
     private Graphics g;
+    private static boolean running = true;
+
+    public static boolean isRunning() {
+        return running;
+    }
+
+    public static void setRunning(boolean running) {
+        Viewer.running = running;
+    }
+
     
 
     public Viewer() {
@@ -56,7 +66,7 @@ public class Viewer extends Canvas implements Runnable {
         
         initPaleta();        
         
-        while (true) {
+        while (running) {
             
             g = this.getGraphics();
             if (g == null) {

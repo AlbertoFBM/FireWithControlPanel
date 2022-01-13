@@ -10,6 +10,25 @@ public class Fire extends BufferedImage implements Runnable {
 
     private final int[][] matrizTemperaturas;
     private FirePalette paleta = new FirePalette();
+    public static int SPARKS = 5; 
+    public static int COOL = 60;
+    
+    public static int getSPARKS() {
+        return SPARKS;
+    }
+
+    public static void setSPARKS(int SPARKS) {
+        Fire.SPARKS = SPARKS;
+    }
+
+    public static int getCOOL() {
+        return COOL;
+    }
+
+    public static void setCOOL(int COOL) {
+        Fire.COOL = COOL;
+    }
+     
 
     public FirePalette getPaleta() {
         return paleta;
@@ -48,7 +67,7 @@ public class Fire extends BufferedImage implements Runnable {
         for (int i = 0; i < matrizTemperaturas.length; i++) {
             int aux = (int) (Math.random() * 99); // Variable auxiliar para colocar el random
 
-            if (aux >= 5) {
+            if (aux >= SPARKS) {
                 matrizTemperaturas[i][matrizTemperaturas.length - 1] = 255;
             }
         }
@@ -59,7 +78,7 @@ public class Fire extends BufferedImage implements Runnable {
         for (int i = 0; i < matrizTemperaturas.length; i++) {
             int aux = (int) (Math.random() * 99);
 
-            if (aux >= 65) {
+            if (aux >= COOL) {
                 matrizTemperaturas[i][matrizTemperaturas.length - 1] = 0;
             }
         }

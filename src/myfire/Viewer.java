@@ -19,23 +19,19 @@ public class Viewer extends Canvas implements Runnable {
     private Fire foc = new Fire(388, 388, 2);
     private Thread tFire = new Thread(foc);
     private Graphics g;
-    private static boolean running = true;
 
-    public static boolean isRunning() {
-        return running;
+    public Fire getFoc() {
+        return foc;
     }
 
-    public static void setRunning(boolean running) {
-        Viewer.running = running;
+    public void setFoc(Fire foc) {
+        this.foc = foc;
     }
-
-    
 
     public Viewer() {
         
         setBackground();
         tFire.start();
-
     }
 
     @Override
@@ -48,26 +44,23 @@ public class Viewer extends Canvas implements Runnable {
             return;
         }
         
-        g = bs.getDrawGraphics();
+        g = bs.getDrawGraphics();        
         
         g.drawImage(chimenea, 0, 0,null);
 
-        g.drawImage(foc, 390, 390, 430, 357, null);
-        
+        g.drawImage(foc, 390, 390, 430, 357, null);        
     
         g.dispose();
         
-        bs.show();
-        
+        bs.show();        
     }  
 
     @Override
     public void run() {
         
-        initPaleta();        
+        initPaleta(); 
         
-        while (running) {
-            
+        while (true) {
             g = this.getGraphics();
             if (g == null) {
                 System.out.println();
@@ -85,12 +78,12 @@ public class Viewer extends Canvas implements Runnable {
     private void initPaleta(){
         
         FirePalette paleta = new FirePalette();
-        
-        TargetColor color1 = new TargetColor(new Color(0, 0, 0, 255), 0); 
-        TargetColor color2 = new TargetColor(new Color(255, 0, 0, 255), 100);
-        TargetColor color3 = new TargetColor(new Color(255, 255, 0, 255), 150);
-        TargetColor color4 = new TargetColor(new Color(20, 20, 20, 255), 50);
-        TargetColor color5 = new TargetColor(new Color(255, 255, 255, 255), 255);
+//                                          (color(r, g, b, a), tempreratura);
+        TargetColor color1 = new TargetColor(new Color(0, 0, 0, 255), 0); // fondo negro
+        TargetColor color2 = new TargetColor(new Color(255, 0, 0, 255), 100); // rojo puro
+        TargetColor color3 = new TargetColor(new Color(255, 255, 0, 255), 150); // amarillo
+        TargetColor color4 = new TargetColor(new Color(20, 20, 20, 255), 50); // gris oscuro
+        TargetColor color5 = new TargetColor(new Color(255, 255, 255, 255), 255); // blanco
         
         paleta.addColor(color1);
         paleta.addColor(color2);
@@ -112,5 +105,137 @@ public class Viewer extends Canvas implements Runnable {
             System.out.println("La imagen no se encuentra");
             e.printStackTrace();
         }
+    }
+    
+    public static void paletaRoja(){
+        FirePalette paleta = new FirePalette();
+//                                          (color(r, g, b, a), tempreratura);
+        TargetColor color1 = new TargetColor(new Color(0, 0, 0, 255), 0); // fondo negro
+        TargetColor color2 = new TargetColor(new Color(255, 0, 0, 255), 100); // rojo puro
+        TargetColor color3 = new TargetColor(new Color(255, 255, 0, 255), 150); // amarillo
+        TargetColor color4 = new TargetColor(new Color(20, 20, 20, 255), 50); // gris oscuro
+        TargetColor color5 = new TargetColor(new Color(255, 255, 255, 255), 255); // blanco
+        
+        paleta.addColor(color1);
+        paleta.addColor(color2);
+        paleta.addColor(color3);
+        paleta.addColor(color4);
+        paleta.addColor(color5);
+        
+        paleta.createPalette();
+        
+        Fire.setPaleta(paleta);
+        
+//        this.foc.setPaleta(paleta);
+    }
+    
+    public static void paletaVerde(){
+        
+        // He cambiado el rojo puro  por verde puro
+        
+        FirePalette paleta = new FirePalette();
+//                                          (color(r, g, b, a), tempreratura);
+        TargetColor color1 = new TargetColor(new Color(0, 0, 0, 255), 0); // fondo negro
+        TargetColor color2 = new TargetColor(new Color(0, 50, 0, 255), 100); // verde
+        TargetColor color3 = new TargetColor(new Color(0, 255, 0, 255), 150); // amarillo
+        TargetColor color4 = new TargetColor(new Color(20, 20, 20, 255), 50); // gris oscuro
+        TargetColor color5 = new TargetColor(new Color(255, 255, 255, 255), 255); // blanco
+        
+        paleta.addColor(color1);
+        paleta.addColor(color2);
+        paleta.addColor(color3);
+        paleta.addColor(color4);
+        paleta.addColor(color5);
+        
+        paleta.createPalette();
+        
+        Fire.setPaleta(paleta);
+    }
+    
+    public static void paletaAzul(){
+        
+        FirePalette paleta = new FirePalette();
+//                                          (color(r, g, b, a), tempreratura);
+        TargetColor color1 = new TargetColor(new Color(0, 0, 0, 255), 0); // fondo negro
+        TargetColor color2 = new TargetColor(new Color(0, 0, 50, 255), 100); // azul fuerte
+        TargetColor color3 = new TargetColor(new Color(0, 0, 255, 255), 150); // azul puro
+        TargetColor color4 = new TargetColor(new Color(20, 20, 20, 255), 50); // gris oscuro
+        TargetColor color5 = new TargetColor(new Color(255, 255, 255, 255), 255); // blanco
+        
+        paleta.addColor(color1);
+        paleta.addColor(color2);
+        paleta.addColor(color3);
+        paleta.addColor(color4);
+        paleta.addColor(color5);
+        
+        paleta.createPalette();
+        
+        Fire.setPaleta(paleta);
+        
+    }
+    
+    public static void paletaAmarilla(){
+        
+        FirePalette paleta = new FirePalette();
+//                                          (color(r, g, b, a), tempreratura);
+        TargetColor color1 = new TargetColor(new Color(0, 0, 0, 255), 0); // fondo negro
+        TargetColor color2 = new TargetColor(new Color(50, 50, 0, 255), 100); // amarillo
+        TargetColor color3 = new TargetColor(new Color(255, 255, 0, 255), 150); // amarillo
+        TargetColor color4 = new TargetColor(new Color(20, 20, 20, 255), 50); // gris oscuro
+        TargetColor color5 = new TargetColor(new Color(255, 255, 255, 255), 255); // blanco
+        
+        paleta.addColor(color1);
+        paleta.addColor(color2);
+        paleta.addColor(color3);
+        paleta.addColor(color4);
+        paleta.addColor(color5);
+        
+        paleta.createPalette();
+        
+        Fire.setPaleta(paleta);
+    }
+    
+    public static void paletaLila(){
+        
+        FirePalette paleta = new FirePalette();
+//                                          (color(r, g, b, a), tempreratura);
+        TargetColor color1 = new TargetColor(new Color(0, 0, 0, 255), 0); // fondo negro
+        TargetColor color2 = new TargetColor(new Color(108,70,117, 255), 100); // amarillo
+        TargetColor color3 = new TargetColor(new Color(71,57,109, 255), 150); // amarillo
+        TargetColor color4 = new TargetColor(new Color(20, 20, 20, 255), 50); // gris oscuro
+        TargetColor color5 = new TargetColor(new Color(255, 255, 255, 255), 255); // blanco
+        
+        paleta.addColor(color1);
+        paleta.addColor(color2);
+        paleta.addColor(color3);
+        paleta.addColor(color4);
+        paleta.addColor(color5);
+        
+        paleta.createPalette();
+        
+        Fire.setPaleta(paleta);        
+    }
+    
+    public static void paletaRainbow(){
+        
+        FirePalette paleta = new FirePalette();
+//                                          (color(r, g, b, a), tempreratura);
+        TargetColor color1 = new TargetColor(new Color(0, 0, 0, 255), 0); // fondo negro
+        TargetColor color2 = new TargetColor(new Color(255,255,0, 255), 100); // amarillo
+        TargetColor color3 = new TargetColor(new Color(0,255,0, 255), 150); // verde
+        TargetColor color4 = new TargetColor(new Color(255,0,0, 255), 50); // rojo
+        TargetColor color5 = new TargetColor(new Color(0,0,255, 255),200); // azul
+        TargetColor color6 = new TargetColor(new Color(255, 0, 255, 255), 255); // rosa
+        
+        paleta.addColor(color1);
+        paleta.addColor(color2);
+        paleta.addColor(color3);
+        paleta.addColor(color4);
+        paleta.addColor(color5);
+        paleta.addColor(color6);
+        
+        paleta.createPalette();
+        
+        Fire.setPaleta(paleta);  
     }
 }

@@ -16,7 +16,16 @@ import javax.swing.JPanel;
  */
 public class MyFire extends JFrame{
 
-    public  final Viewer v = new Viewer();
+    
+    public Viewer v = new Viewer();
+
+    public Viewer getV() {
+        return v;
+    }
+
+    public void setV(Viewer v) {
+        this.v = v;
+    }
     public final ControlPanel cp = new ControlPanel();
 
 
@@ -27,7 +36,6 @@ public class MyFire extends JFrame{
         initViewer();
     }
 
-
     private void initComponents() {
         
         this.setLayout(new BorderLayout());
@@ -35,6 +43,8 @@ public class MyFire extends JFrame{
         this.setResizable(true);
         this.setTitle("MY FIRE");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        String filepath = "src/Images/soundFire.wav";
+        cp.getMusicClass().startMusic(filepath);
         
         
         Toolkit miPantalla = Toolkit.getDefaultToolkit();
@@ -46,20 +56,19 @@ public class MyFire extends JFrame{
         
         this.setLocation(anchoPantalla / 10, altoPantalla / 10);
         
+        this.setResizable(false);        
     }
 
     private void initViewer() {
 
         Thread tViewer = new Thread(v);
-        add(v, BorderLayout.CENTER);
+        add(v, null);
         tViewer.start();
     }
     
     private void initControlPanel(){
-//        cp.setMaximumSize(new Dimension(600,200));
-//        cp.setMinimumSize(new Dimension(600,200));
-        add(cp, BorderLayout.WEST);
-       
+        
+        add(cp, BorderLayout.WEST);       
     }
     
     public static void main(String[] args) {

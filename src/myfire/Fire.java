@@ -9,10 +9,12 @@ import java.awt.image.BufferedImage;
 public class Fire extends BufferedImage implements Runnable {
 
     private final int[][] matrizTemperaturas;
-    private FirePalette paleta = new FirePalette();
-    public static int SPARKS = 5; 
-    public static int COOL = 60;
-    
+    private static FirePalette paleta = new FirePalette();
+    private static int SPARKS = 70; 
+    private static int COOL = 30;
+    private static boolean runningFire = true;
+    private static int velocityFire = 50;
+
     public static int getSPARKS() {
         return SPARKS;
     }
@@ -28,14 +30,29 @@ public class Fire extends BufferedImage implements Runnable {
     public static void setCOOL(int COOL) {
         Fire.COOL = COOL;
     }
-     
 
-    public FirePalette getPaleta() {
+    public static boolean isRunningFire() {
+        return runningFire;
+    }
+
+    public static void setRunningFire(boolean runningFire) {
+        Fire.runningFire = runningFire;
+    }
+
+    public static FirePalette getPaleta() {
         return paleta;
     }
 
-    public void setPaleta(FirePalette paleta) {
-        this.paleta = paleta;
+    public static void setPaleta(FirePalette paleta) {
+        Fire.paleta = paleta;
+    }
+
+    public static int getVelocityFire() {
+        return velocityFire;
+    }
+
+    public static void setVelocityFire(int velocityFire) {
+        Fire.velocityFire = velocityFire;
     }
 
     public Fire(int width, int height, int imageType) {
@@ -48,17 +65,19 @@ public class Fire extends BufferedImage implements Runnable {
     @Override
     public void run() {
         while (true) {
-
-            createSparks();
-            createCool();
-            temperatureEvolve();
-            createFlameImage();
             
             try{
-                Thread.sleep(50);
+                Thread.sleep(velocityFire);
             }catch(InterruptedException e){
                 e.printStackTrace();
             }
+            
+            if(runningFire){
+                createSparks();
+                createCool();
+                temperatureEvolve();
+                createFlameImage();
+            }   
         }
     }
 
@@ -67,7 +86,7 @@ public class Fire extends BufferedImage implements Runnable {
         for (int i = 0; i < matrizTemperaturas.length; i++) {
             int aux = (int) (Math.random() * 99); // Variable auxiliar para colocar el random
 
-            if (aux >= SPARKS) {
+            if (aux <= SPARKS) {
                 matrizTemperaturas[i][matrizTemperaturas.length - 1] = 255;
             }
         }
@@ -78,7 +97,7 @@ public class Fire extends BufferedImage implements Runnable {
         for (int i = 0; i < matrizTemperaturas.length; i++) {
             int aux = (int) (Math.random() * 99);
 
-            if (aux >= COOL) {
+            if (aux <= COOL) {
                 matrizTemperaturas[i][matrizTemperaturas.length - 1] = 0;
             }
         }
@@ -103,5 +122,13 @@ public class Fire extends BufferedImage implements Runnable {
                 this.setRGB(i, j, p);
             }
         }
+    }
+    
+    public static void play(){
+        Fire.setRunningFire(true);
+    }
+    
+    public static void pause(){
+        Fire.setRunningFire(false);
     }
 }

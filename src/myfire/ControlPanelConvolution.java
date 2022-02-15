@@ -34,7 +34,7 @@ public class ControlPanelConvolution extends JPanel {
     private ControlPanel cp;
     private Events events = new Events();
     private JButton returnButton, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10;
-    private JLabel l1;
+    private JLabel l1, l2;
     private JFormattedTextField t1, t2, t3, t4, t5, t6, t7, t8, t9;
     private String filepath;
     private JSlider jslider1;
@@ -227,21 +227,22 @@ public class ControlPanelConvolution extends JPanel {
         t9.setBounds(195, 650, 30, 30);
         this.add(t9);
         
-        /*slider_2 = new JSlider(JSlider.VERTICAL, 0, 100, this.getMyFire().getV().getFoc().getCOOL());
-        slider_2.setBounds(125, 220, 55, 150);
-        slider_2.setInverted(false);
-        slider_2.setMajorTickSpacing(25);
-        slider_2.setMinorTickSpacing(5);
-        slider_2.setPaintTicks(true);
-        slider_2.setPaintLabels(true);
-        slider_2.setSnapToTicks(true);
-        slider_2.setToolTipText("Cools/s");
-        slider_2.addChangeListener(event);
-
-        this.add(slider_2);*/
+        /**
+         * l1 = new JLabel("CONVOLUTION");
+        l1.setForeground(Color.white);
+        l1.setBounds(62, 0, 200, 100);
+        l1.setFont(new Font("Serif", Font.PLAIN, 24));
+        this.add(l1);
+         */
+        
+        l2 = new JLabel("USELESS AREA");
+        l2.setForeground(Color.white);
+        l2.setBounds(75, 675, 300, 100);
+        l2.setFont(new Font("Serif", Font.PLAIN, 24));
+        this.add(l2);
         
         jslider1 = new JSlider(JSlider.HORIZONTAL, 0, 250, this.getMyFire().getV().getFoc().getBRILLO());
-        jslider1.setBounds(50, 700, 225, 75);
+        jslider1.setBounds(40, 750, 240, 75);
         jslider1.setInverted(false);
         jslider1.setMajorTickSpacing(50);
         jslider1.setMinorTickSpacing(25);

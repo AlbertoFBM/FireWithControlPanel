@@ -19,13 +19,14 @@ public class Viewer extends Canvas implements Runnable {
     private Image chimenea;
     private MyFire myFire;
     private Fire foc = new Fire(388, 388, 2, this);
+    private FireOriginal focOriginal = new FireOriginal(388, 388, 2, this);
     //private Thread tFire = new Thread(foc);
     private Graphics g;
     private Convolution convolution = new Convolution();
     private String filepath = "src/images/arbol.jpg";
     private BufferedImage imagenOriginal;
     private BufferedImage imagenConvolucionada;
-    private int velocity = 40;
+    private int velocity = 20;
     private boolean runningFire = true;
 
     public Viewer(MyFire myFire) {
@@ -90,6 +91,14 @@ public class Viewer extends Canvas implements Runnable {
         this.foc = foc;
     }
 
+    public FireOriginal getFocOriginal() {
+        return focOriginal;
+    }
+
+    public void setFocOriginal(FireOriginal focOriginal) {
+        this.focOriginal = focOriginal;
+    }
+
     public Convolution getConvolution() {
         return convolution;
     }
@@ -109,7 +118,7 @@ public class Viewer extends Canvas implements Runnable {
 
     @Override
     public void paint(Graphics g) {
-        
+
         BufferStrategy bs = this.getBufferStrategy();
 
         if (bs == null) {
@@ -127,33 +136,32 @@ public class Viewer extends Canvas implements Runnable {
 
         g.setColor(Color.black);
         g.fillRect(800, 0, 400, 350);
-        g.drawImage(this.getFoc(), 800, 0, 400, 350, null);
+        g.drawImage(this.getFocOriginal(), 800, 0, 400, 350, null);
 
         g.drawImage(this.getImagenOriginal(), 350, 350, 520, 520, null);
 
         g.drawImage(this.getFoc(), 350, 350, 520, 520, null);
 
         g.dispose();
-          
+
         bs.show();
     }
 
-    
     @Override
     public void run() {
 
         initPaleta();
-       
+
         while (true) {
             g = this.getGraphics();
             if (g == null) {
                 System.out.println();
             } else {
-                if(runningFire){
+                if (runningFire) {
                     paint(g);
-                foc.runFire();
+                    foc.runFire();
+                    focOriginal.runFire();
                 }
-                
             }
             try {
                 Thread.sleep(velocity);
@@ -182,6 +190,7 @@ public class Viewer extends Canvas implements Runnable {
         paleta.createPalette();
 
         this.foc.setPaleta(paleta);
+        this.focOriginal.setPaleta(paleta);
     }
 
     public void paletaRoja() {
@@ -201,9 +210,8 @@ public class Viewer extends Canvas implements Runnable {
 
         paleta.createPalette();
 
-        Fire.setPaleta(paleta);
-
-//        this.foc.setPaleta(paleta);
+        this.foc.setPaleta(paleta);
+        this.focOriginal.setPaleta(paleta);
     }
 
     public void paletaVerde() {
@@ -225,7 +233,8 @@ public class Viewer extends Canvas implements Runnable {
 
         paleta.createPalette();
 
-        Fire.setPaleta(paleta);
+        this.foc.setPaleta(paleta);
+        this.focOriginal.setPaleta(paleta);
     }
 
     public void paletaAzul() {
@@ -246,8 +255,8 @@ public class Viewer extends Canvas implements Runnable {
 
         paleta.createPalette();
 
-        Fire.setPaleta(paleta);
-
+        this.foc.setPaleta(paleta);
+        this.focOriginal.setPaleta(paleta);
     }
 
     public void paletaAmarilla() {
@@ -268,7 +277,8 @@ public class Viewer extends Canvas implements Runnable {
 
         paleta.createPalette();
 
-        Fire.setPaleta(paleta);
+        this.foc.setPaleta(paleta);
+        this.focOriginal.setPaleta(paleta);
     }
 
     public void paletaLila() {
@@ -289,7 +299,8 @@ public class Viewer extends Canvas implements Runnable {
 
         paleta.createPalette();
 
-        Fire.setPaleta(paleta);
+        this.foc.setPaleta(paleta);
+        this.focOriginal.setPaleta(paleta);
     }
 
     public void paletaRainbow() {
@@ -312,9 +323,10 @@ public class Viewer extends Canvas implements Runnable {
 
         paleta.createPalette();
 
-        Fire.setPaleta(paleta);
+        this.foc.setPaleta(paleta);
+        this.focOriginal.setPaleta(paleta);
     }
-    
+
     public void play() {
         this.setRunningFire(true);
     }

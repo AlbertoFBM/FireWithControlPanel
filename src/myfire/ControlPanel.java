@@ -243,6 +243,8 @@ public class ControlPanel extends JPanel {
             getMyFire().getV().getFoc().setSPARKS(slider_1.getValue());
             getMyFire().getV().getFoc().setCOOL(slider_2.getValue());
             getMyFire().getV().setVelocity(slider_3.getValue());
+            getMyFire().getV().getFocOriginal().setSPARKS(slider_1.getValue());
+            getMyFire().getV().getFocOriginal().setCOOL(slider_2.getValue());
         }
 
         @Override

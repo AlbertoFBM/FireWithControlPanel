@@ -11,8 +11,8 @@ public class Fire extends BufferedImage {
 
     private MyFire myFire;
     private Viewer viewer;
-    protected final int[][] matrizTemperaturas;
-    private static FirePalette paleta = new FirePalette();
+    private int[][] matrizTemperaturas;
+    private FirePalette paleta = new FirePalette();
     private int SPARKS = 70;
     private int COOL = 40;
     private int BRILLO = 50;
@@ -25,12 +25,17 @@ public class Fire extends BufferedImage {
     private int[][] matrix;
 
     //private boolean[][] booleans;
+
     public FirePalette getPaleta() {
         return paleta;
     }
 
-    public static void setPaleta(FirePalette paleta) {
-        Fire.paleta = paleta;
+    public void setPaleta(FirePalette paleta) {
+        this.paleta = paleta;
+    }
+
+    public Viewer getViewer() {
+        return viewer;
     }
 
     public boolean isConvoluted() {
@@ -119,7 +124,7 @@ public class Fire extends BufferedImage {
         }
     }
 
-    private void createSparks() {
+    public void createSparks() {
 
         for (int i = 0; i < matrizTemperaturas.length; i++) {
             int aux = (int) (Math.random() * 99); // Variable auxiliar para colocar el random
@@ -163,7 +168,7 @@ public class Fire extends BufferedImage {
 
     }
 
-    private void createCool() {
+    public void createCool() {
 
         for (int i = 0; i < matrizTemperaturas.length; i++) {
             int aux = (int) (Math.random() * 99);
@@ -184,7 +189,7 @@ public class Fire extends BufferedImage {
 
     }
 
-    private void temperatureEvolve() {
+    public void temperatureEvolve() {
         int increment = (int) 0.7;
         int mT[][] = matrizTemperaturas;
         for (int j = mT[0].length - 2; j >= 0; j--) {
@@ -209,7 +214,7 @@ public class Fire extends BufferedImage {
         }
     }
 
-    private void createFlameImage() {
+    public void createFlameImage() {
 
         for (int i = 0; i < matrizTemperaturas.length; i++) {
             for (int j = 0; j < matrizTemperaturas[0].length; j++) {

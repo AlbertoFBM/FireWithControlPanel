@@ -1,17 +1,10 @@
 package myfire;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -19,24 +12,21 @@ import javax.swing.JPanel;
  */
 public class MyFire extends JFrame{
     
-    private Viewer v = new Viewer(this);
-    private ControlPanelConvolution controlPanelConvolution = new ControlPanelConvolution(this, v);
-    private ControlPanel cp = new ControlPanel(this, v);
+    private final Viewer v = new Viewer(this);
+    private final ControlPanelConvolution controlPanelConvolution = new ControlPanelConvolution(this, v);
+    private final ControlPanel cp = new ControlPanel(this, v);
+    private final String filepath = "src/Images/theGrandFinale.wav";
 
     public Viewer getV() {
         return v;
-    }
-
-    public void setV(Viewer v) {
-        this.v = v;
     }
 
     public ControlPanelConvolution getControlPanelConvolution() {
         return controlPanelConvolution;
     }
 
-    public void setControlPanelConvolution(ControlPanelConvolution controlPanelConvolution) {
-        this.controlPanelConvolution = controlPanelConvolution;
+    public String getFilepath() {
+        return filepath;
     }
 
     public MyFire() {
@@ -72,8 +62,7 @@ public class MyFire extends JFrame{
         this.setSize(1515, 910);
         this.setTitle("MY FIRE");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        String filepath = "src/Images/soundFire.wav";
-        //cp.getMusicClass().startMusic(filepath);
+        cp.getMusicClass().startMusic(filepath);
         
         
         Toolkit miPantalla = Toolkit.getDefaultToolkit();

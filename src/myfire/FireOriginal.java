@@ -10,6 +10,7 @@ public class FireOriginal extends Fire {
         super(width, height, imageType, viewer);
     }
 
+    @Override
     public void runFire() {
 
         createSparks();

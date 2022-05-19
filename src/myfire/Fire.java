@@ -92,23 +92,6 @@ public class Fire extends BufferedImage {
         matrizTemperaturas = new int[388][388];
 
     }
-//
-//    @Override
-//    public void run() {
-//        while (true) {
-//
-//            try {
-//                Thread.sleep(velocityFire);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//
-//            if (runningFire) {
-//                runFire();
-//
-//            }
-//        }
-//    }
 
     public void runFire() {
         if (!convoluted) {
@@ -196,7 +179,7 @@ public class Fire extends BufferedImage {
             for (int i = 1; i < mT.length - 1; i++) {
                 mT[i][j] = (mT[i][j + 1] + mT[i + 1][j + 1]
                         + mT[i - 1][j + 1] + mT[i - 1][j]
-                        + mT[i + 1][j]) / 5 - increment;
+                        + mT[i + 1][j]) / 5 -increment;
             }
         }
     }

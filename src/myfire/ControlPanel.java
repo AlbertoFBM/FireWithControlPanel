@@ -8,7 +8,6 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,15 +27,13 @@ public class ControlPanel extends JPanel {
     private final MyFire myFire;
     private final Viewer viewer;
     private ControlPanelConvolution controlPanelConvolution;
-    private Events event = new Events();
+    private final Events event = new Events();
     private final Music musicClass = new Music();
-    private final Color backgroundColorRadioButtons = new Color(37, 149, 138);
     private final Color backgroundColor = new Color(44, 42, 50);
     private JButton b1, b2, b3, b4;
     private JSlider slider_1, slider_2, slider_3;
     private JLabel label_0, label_1, label_2, label_3;
     private JRadioButton rb1, rb2, rb3, rb4, rb5, rb6;
-    private String filepath = "src/Images/soundFire.wav";
 
     public ControlPanel(MyFire myFire, Viewer viewer) {
         this.myFire = myFire;
@@ -115,7 +112,6 @@ public class ControlPanel extends JPanel {
         slider_1.setToolTipText("Sparks/s");
 
         slider_1.addChangeListener(event);
-
         this.add(slider_1);
 
         slider_2 = new JSlider(JSlider.VERTICAL, 0, 100, this.getMyFire().getV().getFoc().getCOOL());
@@ -128,7 +124,6 @@ public class ControlPanel extends JPanel {
         slider_2.setSnapToTicks(true);
         slider_2.setToolTipText("Cools/s");
         slider_2.addChangeListener(event);
-
         this.add(slider_2);
 
         slider_3 = new JSlider(JSlider.VERTICAL, 0, 250, this.getMyFire().getV().getVelocity());
@@ -141,7 +136,6 @@ public class ControlPanel extends JPanel {
         slider_3.setSnapToTicks(true);
         slider_3.setToolTipText("Pixels/s");
         slider_3.addChangeListener(event);
-
         this.add(slider_3);
 
         //******************* JLABEL ***********************
@@ -253,15 +247,14 @@ public class ControlPanel extends JPanel {
             switch (e.getActionCommand()) {
                 case "boton1":
 
-                    musicClass.playMusic();
+                    getMusicClass().playMusic();
                     getMyFire().getV().play();
-                    //Fire.play();
                     System.out.println("\nEl fuego ha reanudado.");
                     break;
 
                 case "boton2":
 
-                    musicClass.stopMusic();
+                    getMusicClass().stopMusic();
                     getMyFire().getV().pause();
                     System.out.println("\nEl fuego está pausado.");
                     break;
@@ -338,7 +331,7 @@ public class ControlPanel extends JPanel {
         public void startMusic(String filepath) {
 
             try {
-                musicPath = new File(filepath);
+                musicPath = new File(getMyFire().getFilepath());
                 if (musicPath.exists()) {
                     audioInput = AudioSystem.getAudioInputStream(musicPath);
                     clip.open(audioInput);
